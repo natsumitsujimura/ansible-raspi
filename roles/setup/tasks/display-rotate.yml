@@ -1,0 +1,4 @@
+---
+- name: display rotate 90
+  shell: echo display_rotate=3 >> /boot/config.txt
+  tags: display-rotate

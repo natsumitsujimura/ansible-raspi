@@ -1,0 +1,19 @@
+---
+- name: wordpress download
+  get_url: url=https://ja.wordpress.org/wordpress-4.2.3-ja.tar.gz
+           dest=/tmp/wordpress-ja.tar.gz
+           mode=0444
+  tags: wordpress
+
+- name: unpack wordpress file
+  shell: tar xvzf /tmp/wordpress-ja.tar.gz -C /tmp
+  tags: wordpress
+
+- name: copy wordpress file
+  shell: cp -r /tmp/wordpress/* /var/www/
+  tags: wordpress
+
+- name: change owner wordpress file
+  shell: chown -R www-data:www-data /var/www
+  tags: wordpress
+

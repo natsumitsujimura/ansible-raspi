@@ -1,0 +1,12 @@
+---
+#- include: expand-rootfs.yml
+- include: timezone.yml
+- include: display-rotate.yml
+##- include: keyboard.yml
+#- include: apt-get.yml
+- include: reboot-wait.yml
+##- include: python.yml
+##- include: mysql.yml
+##- include: php5.yml
+##- include: apache2.yml
+##- include: wordpress.yml

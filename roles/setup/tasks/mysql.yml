@@ -1,0 +1,45 @@
+---
+- name: apt-get mysql install
+  apt: pkg={{ item }}
+        force=yes
+        update_cache=yes
+  with_items:
+    - mysql-server
+    - mysql-client
+    - libmysqlclient-dev
+  tags: mysqld
+
+- name: copy my.cnf
+  copy:
+    src: my.cnf
+    dest: /etc/mysql/my.cnf
+    owner: root
+    group: root
+    mode: 0644
+  tags: mysqld
+
+#http://astail.net/?p=715
+- name: pip install MySQL-python
+  pip: name=MySQL-python
+  tags: mysqld
+
+- name: start mysql service
+  service:
+    name: mysql
+    state: started
+    enabled: yes
+  tags: mysqld
+
+#http://yteraoka.github.io/ansible-tutorial/#mysql
+- name: Create database
+  mysql_db: db={{ dbname }} state=present encoding=utf8
+  tags: mysqld
+
+# wordpress 用 DB ユーザーの作成
+- name: Create database user
+  mysql_user: >
+    name={{ dbuser }}
+    password="{{ dbpassword }}"
+    priv={{ dbname }}.*:ALL
+    state=present
+  tags: mysqld

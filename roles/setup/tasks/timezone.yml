@@ -1,0 +1,24 @@
+---
+#It doesn't work today Sep. 2018
+#- name : Create Timezone file.
+#  copy : src=timezone
+#         dest=/etc/timezone
+#         owner=root
+#         group=root
+#         mode=0644
+#         backup=yes
+#  tags: timezone
+
+- name: link timezone
+  file: 
+    src: /usr/share/zoneinfo/Asia/Tokyo
+    dest: /etc/localtime
+    owner: root
+    group: root
+    state: link
+    force: yes
+  tags: timezone
+
+- name: update timezone
+  shell: dpkg-reconfigure --frontend noninteractive tzdata
+  tags: timezone

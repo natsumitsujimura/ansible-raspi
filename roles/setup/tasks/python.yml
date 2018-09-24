@@ -1,0 +1,17 @@
+---
+- name: apt-get python setuptools install
+  apt: pkg={{ item }}
+        force=yes
+        update_cache=yes
+  with_items:
+    - python-setuptools
+    - python-dev
+  tags: python
+
+- name: Install pip
+  easy_install: name=pip
+  tags: python
+ 
+- name: Install python-apt
+  pip: name=python-apt
+  tags: python

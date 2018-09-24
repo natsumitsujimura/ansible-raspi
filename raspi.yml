@@ -1,0 +1,13 @@
+---
+- name: remove Raspberry Pi ssh-publickey
+  hosts: 127.0.0.1
+  tasks:
+   - name: remove ssh publickey
+     shell: ssh-keygen -R {{ inventory_hostname }}
+
+- name: Setup Raspberry Pi
+  hosts: raspi
+  sudo: yes
+
+  roles:
+   - setup

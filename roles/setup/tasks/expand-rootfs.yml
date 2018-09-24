@@ -1,0 +1,4 @@
+---
+- name: expand root file system
+  shell: raspi-config --expand-rootfs
+  tags: expand-rootfs

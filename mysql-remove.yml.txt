@@ -1,0 +1,23 @@
+
+
+#  - name: Drop MySQL test database
+#    mysql_db: name=test state=absent
+
+   - name: stop mysql service
+     service:
+       name: mysql
+       state: stopped
+       enabled: no
+
+#   - name: apt-get purge mysql
+#     shell: apt-get --yes --purge remove mysql-server mysql-common mysql-client
+
+
+   - name: apt-get mysql remove
+     apt: pkg={{ item }}
+          force=yes
+          state=absent
+          purge=yes
+     with_items:
+      - mysql-server
+      - mysql-client

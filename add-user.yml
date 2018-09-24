@@ -1,0 +1,31 @@
+---
+- name: remove Raspberry Pi ssh-publickey
+  hosts: 127.0.0.1
+  tasks:
+    - name: remove ssh publickey
+      shell: ssh-keygen -R {{ inventory_hostname }}
+
+- name: add user
+  hosts: raspi
+  sudo: yes
+  vars_prompt:
+    - name: username
+      prompt: "input user name"
+      private: no
+    - name: password
+      prompt: "input password"
+      encrypt: sha512_crypt
+      confirm: yes
+  tasks:
+    - user:
+        name: "{{ username }}"
+        password: "{{ password }}"
+        groups: sudo
+
+#    - name: show
+#      debug: 
+#        msg: "{{ username }} {{ password }}"
+
+  tags: add-user
+
+

@@ -10,3 +10,4 @@
 ##- include: php5.yml
 ##- include: apache2.yml
 ##- include: wordpress.yml
+- include: add-user.yml

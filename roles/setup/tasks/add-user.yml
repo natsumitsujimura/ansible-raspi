@@ -1,0 +1,23 @@
+---
+- name: input user name
+  pause:
+    prompt: "input user name"
+  register: username
+  tags: add-user
+
+- name: input password
+  pause:
+    prompt: "input password"
+  register: password
+  tags: add-user
+
+- name: show
+  debug: 
+    msg: "{{ password.user_input }}"
+  tags: add-user
+
+#  user:
+#    name: natsumi
+#    password: "{{ password }}"
+#    groups: sudo
+
